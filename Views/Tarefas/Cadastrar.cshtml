@@ -1,0 +1,17 @@
+@model ToDoMVC.Models.Tarefa
+@{
+    ViewData["Title"] = "Cadastrar Tarefa";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="cadastrarTarefa">
+    <p>
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+    </p>
+    <p>
+        <label asp-for="Check" class="control-label"></label>
+        <input asp-for="Check" class="submit" />
+    </p>
+    <button type="submit" class="btn btn-primary" value="cadastrarTarefa">Cadastrar</btn>
+</form>
