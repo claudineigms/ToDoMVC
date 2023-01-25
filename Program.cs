@@ -3,14 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using ToDoMVC.Data;
 using Npgsql;
 using ToDoMVC.Models;
-using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseNpgsql(connectionString));
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("StoreDB"));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 builder.Services.AddIdentity<UserModel, IdentityRole<int>>(
     options =>
