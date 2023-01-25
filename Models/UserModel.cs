@@ -15,6 +15,7 @@ namespace ToDoMVC.Models
         [DataType(DataType.Date)]
         public string DataNascimento { get; set; }
         public string CPF { get; set;}
+        public bool showChecked { get; set; }
 
         [NotMapped]
         [DataType(DataType.Password)]

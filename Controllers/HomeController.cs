@@ -25,10 +25,10 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+    // public IActionResult Privacy()
+    // {
+    //     return View();
+    // }
 
     public IActionResult Register()
     {
@@ -37,20 +37,30 @@ public class HomeController : Controller
 
     [HttpPost]
     public async Task<IActionResult> Cadastrar(UserModel NovoUsuario){
-        Console.WriteLine("Teste");
-        if (NovoUsuario.Senha == NovoUsuario.ConfirmaSenha && NovoUsuario.Senha != "")
+        if (NovoUsuario.UserName == null ||
+            NovoUsuario.Nome == null ||
+            NovoUsuario.Sobrenome == null ||
+            NovoUsuario.Email == null ||
+            NovoUsuario.DataNascimento == null ||
+            NovoUsuario.CPF == null ||
+            NovoUsuario.Senha == null)
         {
-            Console.WriteLine("Teste");
+            TempData["ErrorMessage"] = "Há dados incompletos, verifique!";
+            return RedirectToAction(nameof(Register));
+        }
+        else if(NovoUsuario.Senha == NovoUsuario.ConfirmaSenha && NovoUsuario.Senha != "")
+        {
             UserModel UsuarioACadastar = new UserModel();
             UsuarioACadastar = NovoUsuario;
             UsuarioACadastar.NormalizedEmail = NovoUsuario.Email.ToUpper();
+            UsuarioACadastar.showChecked = true;
             try
             {
                 var resultado = await _userManager.CreateAsync(UsuarioACadastar, NovoUsuario.Senha);
                 if (resultado.Succeeded)
                 {
                     TempData["SucessfulMessage"] = "Usuario Cadastrado com Sucesso!";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Login));
                 }
                 else
                 {
@@ -63,9 +73,9 @@ public class HomeController : Controller
                 return RedirectToAction(nameof(Register));
             }
         }else{
-            Console.WriteLine($"{NovoUsuario.Senha},{NovoUsuario.ConfirmaSenha}");
+            TempData["ErrorMessage"] = "Senha e conta senha não são identicas";
             return RedirectToAction(nameof(Register));
-            }
+        }
     }
 
     public IActionResult Login()

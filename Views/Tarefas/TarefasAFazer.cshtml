@@ -1,4 +1,51 @@
+@model IEnumerable<ToDoMVC.Models.Tarefa>
+
 <span class="text-danger">@TempData["ErrorMessage"]</span>
 <span class="text-dark" style="color: green;">@TempData["SucessfulMessage"]</span>
 
-<a class="nav-link text-dark" asp-area="" asp-controller="Tarefas" asp-action="Cadastrar"><button class="btn btn-primary">Cadastrar Tarefa</button></a>
+<h2>Lista de Tarefas</h2>
+
+<table>
+    <thead>
+        <th>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Tarefas" asp-action="Cadastrar" value=><button class="btn btn-primary">Cadastrar Tarefa</button></a>
+        </th>
+        <th>
+            <form asp-action="switchView"><button class="btn btn-primary">@ViewData["switchView"]</button></form>
+        </th>
+</thead>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Check)
+            </th>
+            <th>
+                Alterar
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Check)
+                </td> 
+                <td>
+                    <form asp-controller="Tarefas" asp-action="Checkar" asp-route-id="@item.Id">
+                        <button class="btn btn-primary">Marcar/Desmarcar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
