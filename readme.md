@@ -1,6 +1,6 @@
 # ToDo With MVC
 
-Projeto com objetivo de aprendizado e conhecimento no desenvolvimento de um sistema em MVC de ToDo utilizando as tecnicas de Identity e MultiTenancy
+Projeto com objetivo de aprendizado e conhecimento no desenvolvimento de um sistema em MVC de ToDo utilizando as tecnicas de Identity e Multi Usuarios
 
 ## Tecnologias
 
@@ -8,7 +8,7 @@ Projeto com objetivo de aprendizado e conhecimento no desenvolvimento de um sist
 - Asp Net MVC
 - Entity Framework (In Memory/PostGres)
 - Identity
-- MultiTenancy
+- Multi Usuarios
 
 ## Tasks
 
